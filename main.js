@@ -41,38 +41,8 @@ const containerArray = [
         resetButton: "reset"
     }
 ]
+let x = 0
 
-
-
-//first mix array
-//s
-//this is straight up stolen from stack overflow
-// function shuffleArray(array) {
-//     for (var i = array.length - 1; i > 0; i--) {
-//         var j = Math.floor(Math.random() * (i + 1));
-//         var temp = array[i];
-//         array[i] = array[j];
-//         array[j] = temp;
-//     }
-//     return array;
-// }
-// let symbol = ["t", "e", "s", "t"]
-
-
-
-// function magic() {
-//     shuffleArray(symbol);
-//     for (i = 0; i < 100 ; i++) {
-//         if (i % 9 === 0) {
-            
-//         }
-//         else {
-//             return i
-//         }
-// }
-// }
-// console.log(magic())
-    
 function pageUpdate () {
     document.getElementById('header').innerHTML = containerArray[x].header;
     document.getElementById('btn').innerHTML = containerArray[x].button;
@@ -107,6 +77,34 @@ btnClick.addEventListener('click', buttonClickForward)
 let btnClickBack = document.getElementById('rstbtn')
 btnClickBack.addEventListener('click', buttonClickBack)
 
+//this is straight up stolen from stack overflow
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+let symbol = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
+console.log(shuffleArray(symbol))
+
+
+
+function magic() {
+    shuffleArray(symbol);
+    for (i = 0; i < 100 ; i++) {
+        if (i % 9 === 0) {
+            return symbol[0]
+        }
+        // else {
+        //     return i
+        // }
+}
+}
+console.log(magic())
+console.log()
 
 // function resetPage () {
 //     document.getElementById('rstbtn').innerHTML = containerArray[x].resetButton;
