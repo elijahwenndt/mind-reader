@@ -1,7 +1,8 @@
+//first set up the array that contains the objects
 const containerArray = [
       {
         header: "I can read your mind",
-        button: "next page",
+        button: "Get Started",
         bottomText: " ",
         backButton: " ",
         resetButton: " "
@@ -34,32 +35,58 @@ const containerArray = [
     {
         header: " ",
         button: "next page",
-        bottomText: "Find your new number. Take note of the symbol beside the number",
+        bottomText: "Find your new number. Take note of the letter beside the number. I will read your mind and guess your letter",
         backButton: "previous page",
         resetButton: "reset"
     }
     ,
     {
         header: " ",
-        button: "next page",
-        bottomText: "6",
+        button: "try again?",
+        bottomText: "is this your letter?",
         backButton: "previous page",
-        resetButton: "reset"
+        resetButton: " "
     }
 ]
+//set up a global variable = 0 
 let x = 0
 
+//the function when ran both gets the correct IDs from the HTML and then sets the inside of the div with what is stored in the object
 function pageUpdate () {
+
+    //using dot notation to grab the correct index in the array with the correct key object pair
     document.getElementById('header').innerHTML = containerArray[x].header;
     document.getElementById('btn').innerHTML = containerArray[x].button;
     document.getElementById('bottomtext').innerHTML = containerArray[x].bottomText;
     document.getElementById('back').innerHTML = containerArray[x].backButton;
-    document.getElementById('reset').innerHTML = containerArray[x].resetButton;
+    document.getElementById('resetbtn').innerHTML = containerArray[x].resetButton;
+    
+    if (x === 0 || x === 5){
+        back.classList.add("d-none");
+        resetbtn.classList.add('d-none')
+        // reset.style.display = 'none'
+    }
+    else {
+        back.classList.remove('d-none')
+        resetbtn.classList.remove('d-none')
+    }
     
     }
-    pageUpdate();
-    
 
+    //runs the function directly after setting it up. because x = 0 at the start, it displays the first page
+    pageUpdate();
+    // if (x === 0 || x === 5){
+    //     back.classList.add("d-none");
+    //     Reset.classList.add('d-none')
+    //     // reset.style.display = 'none'
+    // }
+    // else {
+    //     back.classList.remove('d-none')
+    //     Reset.classList.add('d-none')
+    // }
+    
+//set up the click function, when the button gets clicked, increments x by 1. this in turn sets the global variable and thus the index of the containerArray
+//then it updates the page
 function buttonClickForward (e) {
    
     ++x
@@ -69,6 +96,7 @@ function buttonClickForward (e) {
     pageUpdate()
 }
 
+//same thing as above but goes back a page
 function buttonClickBack (e) {
     --x
     if (x < 0) {
@@ -77,20 +105,25 @@ function buttonClickBack (e) {
 
     pageUpdate()
 }
+
+//similar concept as above but instead when the reset button is clicked it sets the global variable back to 0
 function reset (e){
     x=0
     pageUpdate()
 }
+
+//sets variable = the grabbed button ID
+//adds event listener to the button - when clicked it runs the function stated above
 let btnClick = document.getElementById('btn');
 btnClick.addEventListener('click', buttonClickForward)
 
 let btnClickBack = document.getElementById('back')
 btnClickBack.addEventListener('click', buttonClickBack)
 
-let btnReset = document.getElementById('reset')
+let btnReset = document.getElementById('resetbtn')
 btnReset.addEventListener('click', reset)
 
-//a modified version of the 
+//a slightly modified version of the Durstenfeld shuffle algorithm
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -100,25 +133,35 @@ function shuffleArray(array) {
     }
     return array;
 }
-let symbol = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"]
-let otherSymbol = ["n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+//set up the symbol array
+let symbol = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+// let otherSymbol = ["n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]    old code example
+
 
 function magic() {
+
+    //passes the symbol array into the shuffle array function
     let shuffle = shuffleArray(symbol);
-    // console.log(shuffle);
-    let otherShuffle = shuffleArray(otherSymbol);
-    console.log(otherShuffle);
+    
+
+    //sets up empty array 
     let emptyArray = [];
     
     for (let i = 1; i < 101 ; i++) {
-        let x = Math.floor(Math.random() * otherSymbol.length); 
 
-        
+        //randomized a number and sets equal to x
+        let x = Math.floor(Math.random() * symbol.length); 
+
+        //if i is divisible by 9 with no remainder
         if (i % 9 === 0) {
-            emptyArray.push(i + "--" + symbol[1]);
+
+            //pushes 
+            emptyArray.push(i + ": " + symbol[1] + '<br>');
         }
         else if (i % 9 !== 0) {
-            emptyArray.push(i + "--" + otherSymbol[x]);  
+            emptyArray.push(i + ": " + symbol[x] + '<br>');  
 
         }
     
@@ -131,23 +174,7 @@ function magic() {
 console.log(magic())
 
 
-// function resetPage () {
-//     document.getElementById('rstbtn').innerHTML = containerArray[x].resetButton;
-// }
-// resetPage();
 
-// let rstClick = document.getElementById('rstbtn');
-// rstClick.addEventListener('click', handleReset);
-
-
-// function pageUpdate () {
-// document.getElementById('header').innerHTML = containerArray[x].header;
-// document.getElementById('btn').innerHTML = containerArray[x].button;
-// document.getElementById('bottomtext').innerHTML = containerArray[x].bottomText;
-// // document.getElementById('rstbtn').innerHTML = containerArray[x].resetButton;
-
-// }
-// pageUpdate();
 
 
 
